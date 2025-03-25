@@ -9,7 +9,7 @@ import TrasactionsService from "../../Services/TrasactionsService";
 
 const CustomerManagement: React.FC = () => {
     const [inputValue, setInputValue] = useState("");
-    const [currentTab, setCurrentTab] = useState('Insights');
+    const [currentTab, setCurrentTab] = useState('Data Analytics');
     const [displayedTexts, setDisplayedTexts] = useState<string[]>([]);
     const [recommendations, setRecommendations] = useState([]);
     const [pagination, setPagination] = useState<PaginationState>({
@@ -78,6 +78,8 @@ const CustomerManagement: React.FC = () => {
 
     const handleReset = () => {
         setInputValue("");
+        setRecommendations([])
+        setDisplayedTexts([])
         setList([])
         setPagination({
             currentPage: 0,
@@ -88,6 +90,9 @@ const CustomerManagement: React.FC = () => {
     };
     const handleChange = (value: string) => {
         setCurrentTab(value)
+        setInputValue('')
+        setRecommendations([])
+        setDisplayedTexts([])
     }
 
 
@@ -128,7 +133,7 @@ const CustomerManagement: React.FC = () => {
     const showRecommendationsWordByWord = (recs: any) => {
         let timeouts: any[] = [];
         let newDisplayedTexts = Array(recs.length).fill("");
-
+        console.log(newDisplayedTexts)
         recs.forEach((rec: any, recIndex: any) => {
             const words = rec.split(" ");
             let newText = "";
@@ -152,6 +157,8 @@ const CustomerManagement: React.FC = () => {
 
     const customerAIRecomendation = () => {
         TrasactionsService.customerAIRecomendation(inputValue).then((res) => {
+            setRecommendations([])
+            setDisplayedTexts([])
             if (res && res.data) {
                 console.log(res)
                 const recs = res?.data?.recommendations || [];
@@ -162,6 +169,8 @@ const CustomerManagement: React.FC = () => {
     }
     const businessAIRecomendation = () => {
         TrasactionsService.BusinessAIRecomendation(inputValue).then((res) => {
+            setRecommendations([])
+            setDisplayedTexts([])
             if (res && res.data) {
                 console.log(res)
                 const recs = res?.data?.recommendations || [];
@@ -189,7 +198,7 @@ const CustomerManagement: React.FC = () => {
                 <CustomerNavBar handleChange={handleChange} currentTab={currentTab} />
 
                 <>
-                    {currentTab === 'Insights' && (
+                    {currentTab === 'Data Analytics' && (
 
                         <div className="grid grid-rows-[auto_1fr] gap-4 h-screen p-4 overflow-hidden">
                             {/* Top Section: Textarea & Buttons */}
@@ -197,7 +206,7 @@ const CustomerManagement: React.FC = () => {
                                 {/* Heading with Icon */}
                                 <p className="text-black text-lg font-medium pb-2 flex items-center gap-2">
                                     <img src={aiIcon} alt="AI Icon" className="w-6 h-6" />
-                                    AI-Based Customer Data Analytics
+                                    AI-Powerd Customer Data Analytics
                                 </p>
 
                                 {/* Label */}
@@ -289,6 +298,7 @@ const CustomerManagement: React.FC = () => {
                                         className="block p-2 border border-gray-300 rounded-md text-black text-sm font-lexendDecaLight h-10"
                                         placeholder={'Customer Id'}
                                         value={inputValue}
+                                        disabled={recommendations.length > 0}
                                         onChange={(e) => setInputValue(e.target.value)}
                                     />
                                     <div className="flex justify-start gap-4">
@@ -329,12 +339,12 @@ const CustomerManagement: React.FC = () => {
 
                                 </div>
 
-                                    <div className="">
-                                        <div className="w-full h-full p-4">
+                                    {/* <div className="">
+                                        <div className="w-full h-full p-2">
                                             <div className="col-span-4">
-                                                <ul className="list-disc pl-5 text-sm text-gray-700">
+                                                <ul className="list-disc pl-5 text-sm text-gray-900">
                                                     {displayedTexts.map((rec, index) => (
-                                                        <li className=" border border-gray-200 p-4 m-2" key={index}>{rec}</li>
+                                                        <li className="text-sm font-lexendDecaLight border border-gray-200 p-4 m-2" key={index}>{rec}</li>
                                                     ))}
                                                 </ul>
                                             </div>
@@ -342,7 +352,35 @@ const CustomerManagement: React.FC = () => {
 
 
 
+                                    </div> */}
+                                    <div className="">
+                                        <div className="w-full h-full p-4">
+                                            <div className="col-span-4">
+                                                <ul className="list-disc pl-5 text-sm text-gray-700">
+                                                    {displayedTexts.map((rec, index) => {
+                                                        const processedText = rec.replace(/^\d+\.\s*/, ''); // Remove number prefix
+                                                        const lines = processedText.split('\n'); // Split into lines
+
+                                                        return (
+                                                            <li
+                                                                key={index}
+                                                                className="text-sm font-lexendDecaLight border border-gray-200 p-4 m-2 flex flex-col"
+                                                            >
+                                                                <span className="flex items-start">
+                                                                    <span className="mr-2 text-blue-500">▶</span>
+                                                                    {lines[0]} {/* First line with arrow */}
+                                                                </span>
+                                                                {lines.slice(1).map((line, lineIndex) => (
+                                                                    <span key={lineIndex} className="ml-6">{line}</span> // Indent remaining lines
+                                                                ))}
+                                                            </li>
+                                                        );
+                                                    })}
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
+
                                 </>
                                 )}
                             </div>

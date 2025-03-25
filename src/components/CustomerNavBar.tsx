@@ -9,7 +9,7 @@ const CustomerNavBar = ({
   currentTab
 }: Props) => {
   const subNavItems = [
-    { id: 'Insights', label: 'Insights', active: true },
+    { id: 'Data Analytics', label: 'Data Analytics', active: true },
     { id: 'Recommendations', label: 'Recommendations', active: false },
   ];
 
