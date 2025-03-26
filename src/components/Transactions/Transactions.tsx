@@ -255,7 +255,7 @@ const Transactions: React.FC = () => {
       currency: formData?.Currency,
       timestamp: getFormattedTimestamp(),
       status: 'COMPLETED',
-      customerId: "CUST111",
+      customerId: formData['Customer ID'],
       merchantId: formData['Merchant ID'],
       country: formData['Country'],
       region: formData['Region'],

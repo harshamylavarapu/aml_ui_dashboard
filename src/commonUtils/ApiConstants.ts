@@ -15,7 +15,9 @@ export const TRANSACTION_URL = {
   getAllTransactionsSummary: "/api/v1/transactions/summary",
   transaction: "/api/v1/aml/post-transaction",
   customerAIRecomendation: '/api/v1/recommendations/customer',
-  BusinessAIRecomendation: '/api/v1/recommendations/business'
+  BusinessAIRecomendation: '/api/v1/recommendations/business',
+  ruleBasedCustomerRecomendation: '/api/v1/recommendations/rule-based/customer',
+  ruleBasedBusinessRecomedation: '/api/v1/recommendations/rule-based/business'
 }
 
 

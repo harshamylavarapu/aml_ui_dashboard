@@ -11,6 +11,7 @@ const CustomerNavBar = ({
   const subNavItems = [
     { id: 'Data Analytics', label: 'Data Analytics', active: true },
     { id: 'Recommendations', label: 'Recommendations', active: false },
+    { id: 'Rule Based Recommendations', label: 'Rule Based Recommendations', active: false },
   ];
 
   return (
