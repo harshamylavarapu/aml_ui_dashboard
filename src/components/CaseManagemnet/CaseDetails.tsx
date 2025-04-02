@@ -486,12 +486,57 @@ const CaseDetails: React.FC<AlertDetailsProps> = ({ selectedAlert, getDetails, o
 
 
 
-          <div className="flex justify-between mt-3 text-sm font-semibold text-gray-300 dark:text-black"
+          {/* <div className="flex justify-between mt-3 text-sm font-semibold text-gray-300 dark:text-black"
           >
             {phases.map((phase, index) => (
               <span key={index} className='text-sm text-black mb-1  font-lexend' style={{ width: `${progressPercentage}%` }}>{phase}</span> // Always visible
             ))}
+          </div> */}
+          <div className="relative  justify-between mt-3 text-sm font-semibold text-gray-300 dark:text-black">
+
+            {/* {phases.map((phase, i) => {
+              // const percent = ((index + 2) / phases.length) * 100; // shift by +1 to skip 0%
+              const percent = 3.33 + i * ((100 - 3.33) / 4); // divides space into 3 parts starting from 3.33%
+              const index = Math.floor((i * phases.length) / 4);
+              return (
+                <div
+                  key={index}
+                  className="text-xs text-black font-semibold "
+                  style={{
+                    right: `${percent + 25}%`,
+                  }}
+                >
+                  {percent}%
+                  {phase}
+                </div>
+              );
+            })} */}
+            {phases.map((phase, index) => {
+              // Calculate percentage positions: [25%, 50%, 75%, 100%]
+              // const position = 35 * (index + 1);
+              const positions = [50, 67, 85, 100]; // in %
+
+              return (
+                <div
+                  key={index}
+                  className={`absolute inset-0 text-xs text-black font-semibold`}
+                  // style={{
+                  //   left: index !== phases.length - 1 ? `${position}%` : undefined,
+                  //   transform: index !== phases.length - 1 ? 'translateX(-50%)' : undefined,
+                  // }}
+                  style={{
+                    left: `${positions[index]}%`,
+                    transform: 'translateX(-50%)'
+                  }}
+                >
+                  {/* {position} */}
+                  {phase}
+                </div>
+              );
+            })}
+
           </div>
+
 
 
 

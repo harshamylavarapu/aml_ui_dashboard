@@ -17,7 +17,8 @@ export const TRANSACTION_URL = {
   customerAIRecomendation: '/api/v1/recommendations/customer',
   BusinessAIRecomendation: '/api/v1/recommendations/business',
   ruleBasedCustomerRecomendation: '/api/v1/recommendations/rule-based/customer',
-  ruleBasedBusinessRecomedation: '/api/v1/recommendations/rule-based/business'
+  ruleBasedBusinessRecomedation: '/api/v1/recommendations/rule-based/business',
+  getrules: '/api/v1/rule-recommendations'
 }
 
 
@@ -36,6 +37,7 @@ export const CUSTOMER_MANAGEMENT_URL = {
 
 
 }
+
 
 
 export const CASE_URL = {

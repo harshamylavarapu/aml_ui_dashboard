@@ -13,6 +13,13 @@ class CustomerManagementService {
     ruleBasedBusinessRecomedation(id: any) {
         return axios.get(BASE_URL + TRANSACTION_URL.ruleBasedBusinessRecomedation + '/' + id);
     }
+    getrules(page: any, size: any) {
+
+        return axios.get(`${BASE_URL + TRANSACTION_URL.getrules}?page=${page}&size=${size}`);
+    }
+    createRule(obj: any) {
+        return axios.post(`${BASE_URL + TRANSACTION_URL.getrules}`, obj);
+    }
 }
 
 export default new CustomerManagementService();

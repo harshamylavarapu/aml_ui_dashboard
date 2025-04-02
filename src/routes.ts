@@ -6,6 +6,7 @@ const ManualProcessing = lazy(() => import('./components/ManualProcessing'))
 const CustomerManagement = lazy(() => import("./components/CustomerManagement/CustomerMangement"))
 const CaseManagement = lazy(() => import("./components/CaseManagemnet/CaseManagement"))
 const Reports = lazy(() => import("./components/Reports/Reports"))
+const Rules = lazy(() => import("./components/CustomerManagement/Rules"))
 
 const coreRoutes = [
   {
@@ -37,6 +38,11 @@ const coreRoutes = [
     path: "/reports", // Removed dynamic 'partner' variable
     title: "Reports",
     component: Reports,
+  },
+  {
+    path: "/rules", // Removed dynamic 'partner' variable
+    title: "Rules",
+    component: Rules,
   },
 ];
 
