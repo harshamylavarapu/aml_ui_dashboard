@@ -13,7 +13,12 @@ export const ALERT_URL = {
 export const TRANSACTION_URL = {
   getAllTransactions: "/api/v1/transactions",
   getAllTransactionsSummary: "/api/v1/transactions/summary",
-  transaction: "/api/v1/aml/post-transaction"
+  transaction: "/api/v1/aml/post-transaction",
+  customerAIRecomendation: '/api/v1/recommendations/customer',
+  BusinessAIRecomendation: '/api/v1/recommendations/business',
+  ruleBasedCustomerRecomendation: '/api/v1/recommendations/rule-based/customer',
+  ruleBasedBusinessRecomedation: '/api/v1/recommendations/rule-based/business',
+  getrules: '/api/v1/rule-recommendations'
 }
 
 
@@ -32,6 +37,7 @@ export const CUSTOMER_MANAGEMENT_URL = {
 
 
 }
+
 
 
 export const CASE_URL = {
